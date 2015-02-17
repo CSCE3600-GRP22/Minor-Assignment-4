@@ -62,11 +62,11 @@ int main(int argc, char *argv[])
 		else
 			buffer[++buffLength] = '\0';
 	}
-
+	fclose(bashfile);
 
 	//	strtok functions start here
 
-	
+
 	// set character pointer for each token
 	char *token;
 	// token function that does the magic
@@ -75,7 +75,7 @@ int main(int argc, char *argv[])
 	// set what command is active at a time
 	int comActive = 0;
 
-	
+
 	// This while loop will traverse the buffer created above
 	while(token != NULL)
 	{
@@ -178,7 +178,7 @@ int main(int argc, char *argv[])
 							token = strtok(NULL, " \n\t");
 						}
 					}
-				} 
+				}
 				else
 				{
 					// if command no longer active
@@ -197,7 +197,7 @@ int main(int argc, char *argv[])
 	}
 
 
-	fclose(bashfile);
+
 	free(buffer);
 	return 0;
 }
