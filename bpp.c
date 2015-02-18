@@ -21,7 +21,47 @@ What still needs to be done:
 #include <string.h>
 #include <unistd.h>
 
+int getPos(char *buffer, int x, int i){
+  int check = 0;
+  int pCount = 0;
+  i+=x;
+  do{
+    if(buffer[i] == ' ' || buffer[i] == '\n' || buffer[i] == '\t'){
+      i++;
+    }else{
+      check = 1;
+      do{
+        if(buffer[i] == '('){
+          pCount += x;
+          i+=x;
+        }else if(buffer[i] == ')'){
+          pCount -= x;
+          i+=x;
+        }else if(buffer[i] == ' ' || buffer[i] == '\n' || buffer[i] == '\t'){
+          if(pCount == 0){
+            break;
+          }else{
+            i+=x;
+          }
+        }else{
+          i+=x;
+        }
+      }while((buffer[i] == ' ' || buffer[i] == '\n' || buffer[i] == '\t') && pCount == 0);
+    }
+  }while(check == 0);
+
+  return i;
+}
+
 int assignmentParser(char *buffer, int equalPos){
+  int start, end;
+
+  end = getPos(buffer, 1, equalPos);
+  start = getPos(buffer, -1, equalPos);
+
+  
+
+  return end;
 
 }
 int iwuParser(char *buffer, int startPos){
@@ -236,9 +276,6 @@ void parseBuffer(char *buffer){
 
             }
           }
-        //  else if(buffer[i] == '='){
-                //********NEEDS WORK**************
-      //    }
           //just calls the normal print function whenever
           //there is nothing to modify
           else if(buffer[i] == '\n'){
@@ -247,7 +284,9 @@ void parseBuffer(char *buffer){
             i++;
             startPos = endPos;
           }
-          else if(buffer[i] == '=')
+          else if(buffer[i] == '='){
+            i = startPos = assignmentParser(buffer, i);
+          }
           //else increment by one
           else{
             i++;
