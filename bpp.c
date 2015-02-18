@@ -25,29 +25,37 @@ int getPos(char *buffer, int x, int i){
   int check = 0;
   int pCount = 0;
   i+=x;
+
   do{
     if(buffer[i] == ' ' || buffer[i] == '\n' || buffer[i] == '\t'){
-      i++;
+      i+=x;
     }else{
       check = 1;
       do{
         if(buffer[i] == '('){
           pCount += x;
           i+=x;
+
         }else if(buffer[i] == ')'){
           pCount -= x;
           i+=x;
+
         }else if(buffer[i] == ' ' || buffer[i] == '\n' || buffer[i] == '\t'){
           if(pCount == 0){
+
             break;
           }else{
+
             i+=x;
           }
         }else{
+
           i+=x;
         }
-      }while((buffer[i] == ' ' || buffer[i] == '\n' || buffer[i] == '\t') && pCount == 0);
+
+      }while((buffer[i] != ' ' || buffer[i] != '\n' || buffer[i] != '\t') && pCount == 0);
     }
+
   }while(check == 0);
 
   return i;
@@ -55,12 +63,23 @@ int getPos(char *buffer, int x, int i){
 
 int assignmentParser(char *buffer, int equalPos){
   int start, end;
+  int i, j = 0;
+  char *printBuffer;
+  char *correctBuffer;
+  printBuffer = malloc(300*sizeof(char));
+  correctBuffer = malloc(300*sizeof(char));
 
   end = getPos(buffer, 1, equalPos);
   start = getPos(buffer, -1, equalPos);
 
-  
+  for(i = start; i < end; i++){
+    printBuffer[j] = buffer[i];
+    j++;
+  }
 
+  printBuffer[j] = '\0';
+
+  printf("%s", printBuffer);
   return end;
 
 }
