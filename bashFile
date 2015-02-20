@@ -1,0 +1,16 @@
+#!/bin/bash
+num     =
+'2'
+anum              = "bloop"
+stupid =
+    $(expr 5 + 7)
+meh = $rand
+echo $num
+echo $(expr 5 + $num)
+echo "Hope you have a good day :)"
+if [      $num -lt    5        ]
+  then
+if[$num -lt 5]then
+  echo "Broopadoop"
+fi
+fi
